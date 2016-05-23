@@ -4,6 +4,13 @@ node_modules/
 bower_components/
 *.log
 yumsnap
+/.DS_Store
+/_PRESS-RELEASE.md
+server/.DS_Store
+server/models/.DS_Store
+client/.DS_Store
+client/styles/.DS_Store
+
 
 build/
 dist/

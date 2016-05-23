@@ -1,4 +1,9 @@
 # YumSnap!
+###*Share photos and rate food dishes from local restaurants*
+![ScreenShot](/client/YumSnap2.png?raw=true)
+
+## Summary ##
+YumSnap! is like a combination of Twitter and Yelp, but focused on individual menu items. Using our app, a user can post a new dish to the 'dish feed' that contains information such as the name of the dish, a photo of the dish, the restaurant it can be purchased at, a description of the dish, and the price. Users can then browse our app to see the dishes that people around them have been enjoying. If a user finds a dish they are interested in, all of the relevant information needed to find that dish is clearly listed on our page.
 
 ## Database Setup
 

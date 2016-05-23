@@ -18,14 +18,14 @@ export default class DishCard extends React.Component {
     if (!(this.props.currentUser == this.props.data.user_id) ){
       return {
         display:'none'
-      }
+      };
     }
     else {
       return {
         position: "absolute",
         right: 10,
         bottom: 10
-      }
+      };
     }
   };
 
@@ -38,7 +38,7 @@ export default class DishCard extends React.Component {
   };
 
   displayEmptyStars(){
-    var starString = ""
+    var starString = "";
     for (var i = 0; i < (5 - this.props.data.rating); i++){
       starString += "✩";
     }
@@ -47,10 +47,10 @@ export default class DishCard extends React.Component {
 
   profilepicture(){
     if (this.props.data.profile_picture){
-      return this.props.data.profile_picture
+      return this.props.data.profile_picture;
     }
     else{
-    return "http://lorempixel.com/200/200/"
+    return "http://lorempixel.com/200/200/";
     }
   }
 
@@ -80,36 +80,39 @@ export default class DishCard extends React.Component {
 
       backgroundColor: "#36454f"
     };
-    
+
     //not in use I pasted into function above
     const buttonStyle = {
       position: "absolute",
       right: 10,
       bottom: 10
-    }
+    };
 
     const timeStamp = {
       position: "absolute",
       right: 8,
       top: 8,
       color: 'gray'
-    }
+    };
 
     const iconStyle = {
       position: "absolute",
       left: 10,
       bottom: 10,
       fontSize:20
-    }
+    };
     const starsStyle = {
        color: 'blue',
        fontSize:20
-    }
+    };
     const emptyStarStyle = {
         color: 'black',
         fontSize: 20
-    }
-    
+    };
+    const titleSize = {
+      fontSize: 13
+    };
+
     return (
       <div className="cardWrapper col-sm-6 col-lg-4" style={cardWrapperStyle}>
         <Card
@@ -119,13 +122,6 @@ export default class DishCard extends React.Component {
             title={this.props.data.user}
             subtitle={"Category: "+ this.props.categories[this.props.data.category-1]}
             avatar= {this.profilepicture.bind(this).call()}
-          />
-          <CardMedia style={cardMediaStyle}>
-              <img style={imageStyle} src={this.props.data.picture_path} />
-          </CardMedia>
-          <CardTitle
-            title={this.props.data.dish_name}
-            subtitle={this.props.data.rest_name}
           />
           <CardText>
             <strong style={{clear: "none", float: "right"}}>
@@ -145,6 +141,14 @@ export default class DishCard extends React.Component {
             {moment(this.props.data.timestamp).calendar()}
           </div>
           </CardText>
+
+          <CardTitle style={titleSize}
+            title={this.props.data.dish_name}
+            subtitle={this.props.data.rest_name}
+          />
+          <CardMedia style={cardMediaStyle}>
+              <img style={imageStyle} src={this.props.data.picture_path} />
+          </CardMedia>
             <FlatButton onClick={this.handleDeleteCard.bind(this)}
                         label="Remove Dish"
                         style = {this.displayDeleteButton.bind(this).call()}
@@ -154,6 +158,6 @@ export default class DishCard extends React.Component {
             />
         </Card>
       </div>
-    ); 
+    );
   }
 }

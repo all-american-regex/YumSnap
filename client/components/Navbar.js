@@ -25,7 +25,7 @@ export default class Navbar extends React.Component {
     const toggleFilter = e.target.value;
     window.setTimeout(
       function(){
-      this.props.stateToggle(toggleFilter)}.bind(this),
+      this.props.stateToggle(toggleFilter);}.bind(this),
       0
     );
   }
@@ -34,22 +34,22 @@ export default class Navbar extends React.Component {
     if (!(this.props.currentUser) ){
       return {
         display:'none'
-      }
+      };
     }
     else {
-      return 
+      return;
     }
   }
   avatarStyle(){
     if (!this.props.currentAvatar){
       return {
         display:'none'
-      }
+      };
     }
     else {
       return {
         //margin:'auto'
-      }
+      };
     }
   }
 
@@ -57,7 +57,7 @@ export default class Navbar extends React.Component {
     if ((this.props.currentUser) ){
       return {
         display:'none'
-      }
+      };
     }
 
 
@@ -67,21 +67,21 @@ export default class Navbar extends React.Component {
     if (!(this.props.currentUser) ){
       return {
         display:'none'
-      }
+      };
     }
 
   }
   handleShowSignup() {
-    this.props.toggleSignup()
+    this.props.toggleSignup();
   }
 
   handleShowLogin() {
-    this.props.toggleLogin()
+    this.props.toggleLogin();
   }
 
   handleShowAdd() {
-    console.log('this.props: ', this.props)
-    console.log('this.props.currentUser: ', this.props.currentUser)
+    console.log('this.props: ', this.props);
+    console.log('this.props.currentUser: ', this.props.currentUser);
     this.props.stateToggle('showAdd');
     this.props.stateToggle('showHead');
   }
@@ -92,7 +92,7 @@ export default class Navbar extends React.Component {
         color: "red",
         minWidth: 160,
         maxWidth: 160,
-        fontWeight: 700, 
+        fontWeight: 700,
         fontSize: "30px",
         marginRight: 0,
         paddingLeft: 12,
@@ -131,7 +131,7 @@ export default class Navbar extends React.Component {
               <MenuItem value={4} primaryText="Italian"/>
               <MenuItem value={5} primaryText="BBQ"/>
           </DropDownMenu>
-        
+
           <Checkbox
             value="veg"
             onClick={this.handleToggle.bind(this)}
@@ -151,9 +151,9 @@ export default class Navbar extends React.Component {
             style={styles.checkbox}
           />
         </ToolbarGroup>
-        <ToolbarSeparator style={ {marginLeft: '20px'} }/>
+        {/*<ToolbarSeparator style={ {marginLeft: '20px'} }/>*/}
         <ToolbarGroup float="right">
-          <RaisedButton 
+          <RaisedButton
             linkButton={true}
             href={"/logout"}
             label='Logout'
@@ -162,30 +162,30 @@ export default class Navbar extends React.Component {
           <RaisedButton onClick={this.handleShowAdd.bind(this)}
                         label={!this.props.showAdd ? "ADD DISH" : "CANCEL"}
                         backgroundColor="#7ec0ee"
-                        style={this.displayAddPostButton.bind(this).call()} 
-          /> 
-          <RaisedButton 
+                        style={this.displayAddPostButton.bind(this).call()}
+          />
+          <RaisedButton
             linkButton={true}
-           
+
             label='Signup'
             style = {this.showLogin.bind(this).call()}
             onClick = {this.handleShowSignup.bind(this)}
           />
-          <RaisedButton 
+          <RaisedButton
             linkButton={true}
-            
+
             label='Login'
             style = {this.showLogin.bind(this).call()}
             onClick = {this.handleShowLogin.bind(this)}
           />
           <div style={styles.socialbtns}>
             <div className="superbutton">
-            <a href="/auth/github" 
-               class="btn btn-social-icon btn-lg  btn-github" 
+            <a href="/auth/github"
+               class="btn btn-social-icon btn-lg  btn-github"
                style = {this.showLogin.bind(this).call()}>
-               <span 
+               <span
                class="fa fa-github">
-               </span> 
+               </span>
             </a>
             <a href="/auth/google" class="btn btn-social-icon btn-lg btn-google" style = {this.showLogin.bind(this).call()}><span class="fa fa-google"></span> </a>
             <a href="/auth/twitter" class="btn btn-social-icon btn-lg btn-twitter" style = {this.showLogin.bind(this).call()}><span class="fa fa-twitter"></span> </a>
@@ -193,7 +193,7 @@ export default class Navbar extends React.Component {
           </div>
         </ToolbarGroup>
       </Toolbar>
-    )
+    );
   }
 }
 /*
