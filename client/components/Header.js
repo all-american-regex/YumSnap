@@ -7,9 +7,7 @@ export default class Head extends React.Component {
       <div class="jumbotron text-center">
       <h1> YumSnap!</h1>
       <LoginBar />
-
-
       </div>
-    )
+    );
   }
 }

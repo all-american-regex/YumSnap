@@ -1,26 +1,18 @@
 var passport = require('passport');
 var User = require('../models/users');
 
+module.exports = function () {
 
-module.exports = function() {
-
-  passport.serializeUser(function(user, done) {
-    console.log('serializeUser = ', user);
+  passport.serializeUser(function (user, done) {
     done(null, user);
   });
 
-  passport.deserializeUser(function(user, done) {
-    console.log('deserializeUser == ', user);
-
-    User.verifyId(user.passid).then(function(data) {
-        console.log('verifyId err = ', data);
-        console.log('user is = ', user);
+  passport.deserializeUser(function (user, done) {
+    User.verifyId(user.passid).then(function (data) {
         done(null, user);
       })
-      .catch(function(err) {
-        console.log('deserial errr = ', err);
+      .catch(function (err) {
         done(null, user);
       });
   });
-
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import DishCard from "./Card"
+import DishCard from "./Card";
 
 export default class CardFeed extends React.Component {
   matchesUserFilters(c) {
@@ -14,9 +14,9 @@ export default class CardFeed extends React.Component {
     return (
       <div>
         {this.props.cardData.map((card, index) => this.matchesUserFilters(card) ?
-          <DishCard 
+          <DishCard
           key = {index}
-          data = {card} 
+          data = {card}
           currentUser = {this.props.currentUser}
           categories = {this.props.categories}
           deleteCard = {this.props.deleteCard.bind(this)}

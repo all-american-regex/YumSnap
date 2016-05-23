@@ -7,7 +7,6 @@ var passport = require('passport');
 var Posts = require('./models/posts');
 var Users = require('./models/users');
 var logger = require('morgan');
-
 var Path = require('path');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
@@ -23,7 +22,7 @@ var knex = Knex({
 
 var store = new KnexSessionStore({
   knex: knex,
-  tablename: 'sessions' // optional. Defaults to 'sessions'
+  tablename: 'sessions'
 });
 
 var passportGithub = require('./auth/github');
@@ -31,25 +30,31 @@ var passportGoogle = require('./auth/google');
 var passportLocal = require('./auth/local');
 var passportTwitter = require('./auth/twitter');
 
-
-
 var routes = express.Router();
 var app = express();
 app.use(logger('dev'));
 
-
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath,
-  stats: { colors: true }
+  stats: {
+    colors: true
+  }
 }));
 
 var assetFolder = Path.resolve(__dirname, '../client');
-app.use(express.static(assetFolder, { index: 'index.html' }));
+app.use(express.static(assetFolder, {
+  index: 'index.html'
+}));
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 
-app.use(session({ secret: 'supersecretysecret', store: store })); // session secret
+app.use(session({
+  secret: 'supersecretysecret',
+  store: store
+})); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use('/', routes);
@@ -59,37 +64,26 @@ var port = process.env.PORT || 4000;
 app.listen(port);
 console.log("Listening on port", port);
 
-
-
-
 // ---------- Routes Start Here ------------- //
 
 //get endpoint for json obj for posts
-routes.get('/feed', function(req, res) {
-  console.log('getting feed!');
-
-  if (req.user) {
-    console.log('user is authed!');
-    console.log('user = ', req.user);
-  }
+routes.get('/feed', function (req, res) {
 
   Posts.loader()
-    .then(function(posts) {
+    .then(function (posts) {
       res.status(200).send(posts);
     })
-    .catch(function(err) {
-      console.log('Error getting posts: ', err);
+    .catch(function (err) {
       return res.status(404).send(err);
     });
 });
 
-routes.get('/userstate', function(req, res) {
+routes.get('/userstate', function (req, res) {
 
   if (req.user) {
-    Users.grabID(req.user.passid).then(function(resp) {
+    Users.grabID(req.user.passid).then(function (resp) {
       var obj = {};
-      console.log(resp)
-      if(resp[0]) {
+      if (resp[0]) {
         obj = {
           user: req.user.user,
           passid: req.user.passid,
@@ -99,85 +93,69 @@ routes.get('/userstate', function(req, res) {
       } else {
         res.status(403).send();
       }
-      
       res.status(200).send(JSON.stringify(obj));
     });
-
   } else {
     res.status(403).send();
   }
-
 });
 
 //get endpoint to serve up index.html
-routes.get('/dashboard', function(req, res) {
+routes.get('/dashboard', function (req, res) {
   res.sendFile(assetFolder + '/index.html');
 });
 
 //post endpoint for user feed
-routes.post('/feed', function(req, res) {
+routes.post('/feed', function (req, res) {
   var card = req.body;
 
   Posts.create(card)
-    .then(function(post) {
+    .then(function (post) {
       res.status(201).send(post);
     })
-    .catch(function(err) {
-      console.log('Error creating new post: ', err);
+    .catch(function (err) {
       return res.status(404).send(err);
     });
 });
 
-
-routes.delete('/delete', function(req, res) {
-
+routes.delete('/delete', function (req, res) {
   //add check to see if post id matches user id.
-
   Posts.delete(req.body)
-    .then(function() {
+    .then(function () {
       res.status(204).send();
     })
-    .catch(function(err) {
-      console.log('failed to delete card');
+    .catch(function (err) {
       return res.status(404).send(err);
     });
 });
 
-
-routes.post('/upload', function(req, res) {
+routes.post('/upload', function (req, res) {
   var file = req.body;
-  console.log("req body:", file);
   var path = "./client/pictures/test4.jpg";
-  fs.writeFile(path, file.preview, function(err) {
+  fs.writeFile(path, file.preview, function (err) {
     if (err) {
       throw err;
     }
-    console.log('No errors!');
   });
 });
 
-
 // endpoint thats only used to update categories table
-routes.post('/categories', function(req, res) {
+routes.post('/categories', function (req, res) {
   var cats = req.body;
 
   Users.categories(cats)
-    .then(function(cat) {
+    .then(function (cat) {
       res.status(201).send(cats);
     })
-    .catch(function(err) {
-      console.log('Error creating new post: ', err);
+    .catch(function (err) {
       return res.status(404).send(err);
     });
 });
-
 
 //------Authentication Routes
 
 // Github
-routes.get('/auth/github', passportGithub.authenticate('github', {
-  //scope: ['user:email']
-}));
+routes.get('/auth/github', passportGithub.authenticate('github', {}));
 
 routes.get('/auth/github/callback',
   passportGithub.authenticate('github', {
@@ -207,9 +185,8 @@ routes.get('/auth/twitter/callback',
     successRedirect: '/'
   }));
 
-
 // LOGOUT
-routes.get('/logout', function(req, res) {
+routes.get('/logout', function (req, res) {
   req.logout();
   res.redirect('/');
 });

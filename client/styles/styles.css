@@ -1,21 +1,21 @@
 @font-face {
-    font-family: MasterOfBreak;
-    src: url(master_of_break.otf);
+  font-family: MasterOfBreak;
+  src: url(master_of_break.otf);
 }
 
 .container {
-	position: inherit;
-	display: block;
-	height: 30vh;
+  position: inherit;
+  display: block;
+  height: 30vh;
 }
 
 .loginbox {
-	margin: auto;
-	width: 200px;
+  margin: auto;
+  width: 200px;
 }
 
 .superbutton {
-	margin-right: -20px;
-	padding-top: 6px;
-	padding-left: 40px;
+  margin-right: -20px;
+  padding-top: 6px;
+  padding-left: 40px;
 }

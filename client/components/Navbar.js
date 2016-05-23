@@ -20,7 +20,6 @@ export default class Navbar extends React.Component {
     this.props.categorySelect(value);
   }
 
-  // YES, this setTimeout looks janky but it was the only way I found that displays the checked boxes after selecting them
   handleToggle(e) {
     const toggleFilter = e.target.value;
     window.setTimeout(
@@ -40,6 +39,7 @@ export default class Navbar extends React.Component {
       return;
     }
   }
+
   avatarStyle(){
     if (!this.props.currentAvatar){
       return {
@@ -48,7 +48,7 @@ export default class Navbar extends React.Component {
     }
     else {
       return {
-        //margin:'auto'
+        margin:'auto'
       };
     }
   }
@@ -59,9 +59,8 @@ export default class Navbar extends React.Component {
         display:'none'
       };
     }
-
-
   }
+
   showLogout() {
 
     if (!(this.props.currentUser) ){
@@ -69,8 +68,8 @@ export default class Navbar extends React.Component {
         display:'none'
       };
     }
-
   }
+
   handleShowSignup() {
     this.props.toggleSignup();
   }
@@ -80,8 +79,6 @@ export default class Navbar extends React.Component {
   }
 
   handleShowAdd() {
-    console.log('this.props: ', this.props);
-    console.log('this.props.currentUser: ', this.props.currentUser);
     this.props.stateToggle('showAdd');
     this.props.stateToggle('showHead');
   }
@@ -89,6 +86,7 @@ export default class Navbar extends React.Component {
   render () {
     const styles = {
       title: {
+        fontFamily: 'MasterOfBreak',
         color: "red",
         minWidth: 160,
         maxWidth: 160,
@@ -96,32 +94,28 @@ export default class Navbar extends React.Component {
         fontSize: "30px",
         marginRight: 0,
         paddingLeft: 12,
-        fontFamily: 'MasterOfBreak'
       },
+
       dropdown: {
         marginRight: 100,
-        // width: 30,
       },
+
       toolbar: {
         color: "black",
         fill: 'black',
       },
+
       checkbox: {
         maxWidth: 150,
         marginTop: 16,
-        paddingLeft: 10,
       },
-      socialbtns: {
-        // position: 'absolute',
-        // top: 0,
-        // right: 0
-      }
+
     };
 
     return (
       <Toolbar style={styles.toolbar}>
         <Avatar src = {this.props.currentAvatar} float = 'left' style = {this.avatarStyle.bind(this).call()} size = {55}/>
-        <ToolbarTitle style={styles.title} text="YumSnap!" />
+        <ToolbarTitle style={styles.title} text="YumSnap!"/>
         <ToolbarGroup firstChild={true} float="left">
           <DropDownMenu style={styles.dropdown} iconStyle={{fill: 'black'}} labelStyle={{fontSize: '18', fontWeight: 'bold', textDecoration: 'underline'}} value={this.props.category} onChange={this.handleCategory.bind(this)}>
               <MenuItem value={null} primaryText="All"/>
@@ -151,7 +145,6 @@ export default class Navbar extends React.Component {
             style={styles.checkbox}
           />
         </ToolbarGroup>
-        {/*<ToolbarSeparator style={ {marginLeft: '20px'} }/>*/}
         <ToolbarGroup float="right">
           <RaisedButton
             linkButton={true}
@@ -196,15 +189,3 @@ export default class Navbar extends React.Component {
     );
   }
 }
-/*
-          In case we want to filter by favorites later:
-
-          <Checkbox
-            value="showFavs"
-            onClick={this.handleToggle.bind(this)}
-            checkedIcon={<ActionFavorite/>}
-            uncheckedIcon={<ActionFavoriteBorder/>}
-            label="Favorites"
-            style={styles.checkbox}
-          />
-*/

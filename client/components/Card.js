@@ -15,7 +15,7 @@ export default class DishCard extends React.Component {
   }
 
   displayDeleteButton(){
-    if (!(this.props.currentUser == this.props.data.user_id) ){
+    if (!(this.props.currentUser === this.props.data.user_id) ) {
       return {
         display:'none'
       };
@@ -30,16 +30,16 @@ export default class DishCard extends React.Component {
   };
 
   displayFilledStars(){
-    var starString="";
-    for (var i = 0; i < this.props.data.rating; i++){
+    let starString = "";
+    for (let i = 0; i < this.props.data.rating; i++) {
       starString += "✮";
     }
     return starString;
   };
 
   displayEmptyStars(){
-    var starString = "";
-    for (var i = 0; i < (5 - this.props.data.rating); i++){
+    let starString = "";
+    for (let i = 0; i < (5 - this.props.data.rating); i++){
       starString += "✩";
     }
     return starString;
@@ -77,7 +77,6 @@ export default class DishCard extends React.Component {
       borderBottom: '30px solid',
       borderTop: '30px solid',
       borderColor: '#36454f',
-
       backgroundColor: "#36454f"
     };
 
